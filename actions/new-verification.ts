@@ -1,17 +1,17 @@
 "use server";
 
 import { getUserByEmail } from "@/data/user";
-import { getVerificationTokenByEmail } from "@/data/verification-token";
+import { getVerificationTokenByToken } from "@/data/verification-token";
 import { db } from "@/lib/db";
 
 export const newVerification = async (token: string) => {
-  const existingToken = await getVerificationTokenByEmail(token);
+  const existingToken = await getVerificationTokenByToken(token);
 
   if (!existingToken) {
-    return { error: "Token does not exist!" };
+    return { error: "Token does not exist!!" };
   }
   const hasExpired = new Date(existingToken.expires) < new Date();
-  if (!hasExpired) {
+  if (hasExpired) {
     return { error: "Token has expired!" };
   }
   const existingUser = await getUserByEmail(existingToken.email);

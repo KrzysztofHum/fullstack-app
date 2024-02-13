@@ -5,7 +5,7 @@ export const getVerificationTokenByEmail = async (email: string) => {
     const verificationToken = await db.verificationToken.findFirst({
       where: { email },
     });
-    return verificationToken;
+    console.log(verificationToken);
   } catch {
     return null;
   }

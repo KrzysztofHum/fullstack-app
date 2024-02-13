@@ -3,7 +3,8 @@ import { boolean } from "zod";
 
 export type ExtendedUser = DefaultSession["user"] & {
   role: "ADMIN" | "USER";
-  isTwoFactorEnabled: Boolean;
+  isTwoFactorEnabled: boolean;
+  isOAuth: boolean;
 };
 
 declare module "next-auth" {
